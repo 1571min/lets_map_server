@@ -3,13 +3,16 @@ const router = express.Router();
 const verifyToken = require('../middleware/verifyToken');
 const { userController, marketController } = require('../controller');
 
-// * POST /user/signin
+// * POST /signin
 router.post('/signin', userController.signin.post);
 
-// * POST /user/signout
+// * GET /signin/signin_google
+router.get('/signin_google', userController.signin_google.get);
+
+// * POST /signout
 router.post('/signout', userController.signout.post);
 
-// * POST /user/signup
+// * POST /signup
 router.post('/signup', userController.signup.post);
 
 router.get('/findAddress', marketController.findAddress.get);
