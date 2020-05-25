@@ -1,7 +1,7 @@
 const getMarketAPI = require('../../util/getMarketAPI');
 module.exports = {
   get: async (req, res) => {
-    const { address } = req.body;
+    const address = req.query.address;
     let result = [];
 
     // * 경기도 api로 부터 도로명 주소 마켓 받아온다

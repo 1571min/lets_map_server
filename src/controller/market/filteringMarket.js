@@ -12,7 +12,8 @@ const getMarketAPI = require('../../util/getMarketAPI');
 require('dotenv').config();
 module.exports = {
   get: async (req, res) => {
-    const { address, indutype } = req.body;
+    const address = req.query.address;
+    const indutype = req.query.indutype;
     let result = [];
 
     // * 경기도 api로 부터 도로명 주소 마켓 받아온다
