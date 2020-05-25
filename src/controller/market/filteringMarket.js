@@ -8,6 +8,7 @@ const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const indutypeFilter = require('../../util/indutypeChecker');
 const getMarketAPI = require('../../util/getMarketAPI');
+const famattingKaKao = require('../../util/famattingKaKao');
 
 require('dotenv').config();
 module.exports = {
@@ -28,6 +29,7 @@ module.exports = {
       result = indutypeFilter.get(lotNumber, indutype);
     }
 
+    result = famattingKaKao.get(result);
     result = result.filter((ele) => ele !== undefined);
     if (result) {
       res.status(200).send({ addressList: result });

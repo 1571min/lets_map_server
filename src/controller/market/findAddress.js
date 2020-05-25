@@ -1,4 +1,6 @@
 const getMarketAPI = require('../../util/getMarketAPI');
+const famattingKaKao = require('../../util/famattingKaKao');
+
 module.exports = {
   get: async (req, res) => {
     const address = req.query.address;
@@ -20,6 +22,7 @@ module.exports = {
 
     // * 상호명 마켓과 주소 마켓을 합치고 클라이언트로 응답을 보낸다
     result = result.concat(tradeName);
+    result = famattingKaKao.get(result);
     if (result) {
       res.status(200).send({ addressList: result });
     } else {

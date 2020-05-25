@@ -32,14 +32,15 @@ module.exports = {
         let marketlist = [];
         for (let i = 0; i < data.length; i++) {
           marketlist.push({
-            marketname: data[i].market.marketname,
-            indutype: data[i].market.indutype,
-            telephone: data[i].market.telephone,
-            address: data[i].market.address,
-            logt: data[i].market.logt,
-            lat: data[i].market.lat,
+            place_name: data[i].market.marketname,
+            category_name: data[i].market.indutype,
+            phone: data[i].market.telephone,
+            address_name: data[i].market.address,
+            x: data[i].market.logt,
+            y: data[i].market.lat,
           });
         }
+
         result['marketlist'] = marketlist;
         return res.status(200).json(result);
       })
