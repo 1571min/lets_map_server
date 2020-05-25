@@ -7,7 +7,7 @@ const { userController, marketController } = require('../controller');
 router.post('/signin', userController.signin.post);
 
 // * GET /signin/signin_google
-router.get('/signin_google', userController.signin_google.get);
+router.post('/signin_google', userController.signin_google.post);
 
 // * POST /signout
 router.post('/signout', userController.signout.post);
