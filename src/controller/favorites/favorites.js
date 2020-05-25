@@ -7,7 +7,7 @@ module.exports = {
     /*
      * 유저의 id를 통해 즐겨찾기를 조회하고 마켓의 정보를 제공한다
      */
-    let { userid } = req.body;
+    let userid = req.query.userid;
     favorite_markets
       .findAll({
         include: [

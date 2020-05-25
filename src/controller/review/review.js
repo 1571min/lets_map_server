@@ -7,7 +7,8 @@ module.exports = {
     /*
      * 마켓의 위치를 통해 조회하고 마켓 ,유저 , 리뷰를 함께 JOIN해서 보낸다
      */
-    let { logt, lat } = req.body;
+    const logt = req.query.logt;
+    const lat = req.query.lat;
     comments
       .findAll({
         include: [
