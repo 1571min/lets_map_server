@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const verifyToken = require('../middleware/verifyToken');
+
 const {
   userController,
   marketController,
@@ -8,8 +9,13 @@ const {
   favoritesController,
 } = require('../controller');
 
+
 // * POST /signin
 router.post('/signin', userController.signin.post);
+
+
+// * GET /signin/signin_google
+router.post('/signin_google', userController.signin_google.post);
 
 // * POST /signout
 router.post('/signout', userController.signout.post);
