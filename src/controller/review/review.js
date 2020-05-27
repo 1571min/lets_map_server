@@ -49,6 +49,8 @@ module.exports = {
     /*
      * 마켓,유저,리뷰 정보를 DB에 저장한다
      */
+    let { userid, market, text } = req.body;
+
     if (userid && market.logt && market.lat) {
       users
         .findOne({
