@@ -18,6 +18,8 @@ router.post('/signin_google', userController.signin_google.post);
 // * GET /
 router.get('/userinfo', verifyToken, userController.userinfo.get);
 
+router.post('/userinfo', verifyToken, userController.userinfo.get);
+
 // * POST /signout
 router.post('/signout', userController.signout.post);
 
