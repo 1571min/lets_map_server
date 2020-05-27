@@ -217,12 +217,16 @@ const indutypeData = {
 
 module.exports = {
   get: (marketList, indutype) => {
-    let resultMarket = marketList.map((market) => {
-      if (indutypeData[indutype].includes(market.INDUTYPE_NM)) {
-        return market;
-      }
-    });
-    indutypeData[indutype];
-    return resultMarket;
+    if (marketList[0] !== null) {
+      let resultMarket = marketList.map((market) => {
+        if (indutypeData[indutype].includes(market.INDUTYPE_NM)) {
+          return market;
+        }
+      });
+      indutypeData[indutype];
+      return resultMarket;
+    } else {
+      return [];
+    }
   },
 };

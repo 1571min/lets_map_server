@@ -49,46 +49,49 @@ module.exports = {
     /*
      * 마켓,유저,리뷰 정보를 DB에 저장한다
      */
-    let { userid, market, text } = req.body;
-    users
-      .findOne({
-        where: {
-          userid,
-        },
-      })
-      .then((userData) => {
-        markets.findOrCreate;
-        markets
-          .findOrCreate({
-            where: { logt: market.logt, lat: market.lat },
-            defaults: {
-              marketname: market.name,
-              indutype: market.induType,
-              telephone: market.telNo,
-              address: market.address,
-              logt: market.logt,
-              lat: market.lat,
-            },
-          })
-          .then(([marketData, created]) => {
-            comments
-              .create({
-                text: text,
-                userid: userData.id,
-                marketid: marketData.id,
-              })
-              .then((data) => {
-                return res.status(200).json({
-                  comments: data,
-                  code: 200,
+    if (userid && market.logt && market.lat) {
+      users
+        .findOne({
+          where: {
+            userid,
+          },
+        })
+        .then((userData) => {
+          markets.findOrCreate;
+          markets
+            .findOrCreate({
+              where: { logt: market.logt, lat: market.lat },
+              defaults: {
+                marketname: market.name,
+                indutype: market.induType,
+                telephone: market.telNo,
+                address: market.address,
+                logt: market.logt,
+                lat: market.lat,
+              },
+            })
+            .then(([marketData, created]) => {
+              comments
+                .create({
+                  text: text,
+                  userid: userData.id,
+                  marketid: marketData.id,
+                })
+                .then((data) => {
+                  return res.status(200).json({
+                    comments: data,
+                    code: 200,
+                  });
                 });
-              });
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).send('server error');
-      });
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).send('server error');
+        });
+    } else {
+      res.status(404).send('Not Found');
+    }
   },
   delete: (req, res) => {
     let { id } = req.body;

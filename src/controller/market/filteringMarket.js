@@ -13,28 +13,34 @@ const famattingKaKao = require('../../util/famattingKaKao');
 require('dotenv').config();
 module.exports = {
   get: async (req, res) => {
-    const address = req.query.address;
-    const indutype = req.query.indutype;
-    let result = [];
+    try {
+      const address = req.query.address;
+      const indutype = req.query.indutype;
 
-    // * 경기도 api로 부터 도로명 주소 마켓 받아온다
-    let roadNumber = await getMarketAPI.api('REFINE_ROADNM_ADDR', address);
+      let result = [];
 
-    // * 도로명이 존재하면 지번주소 마켓은 생략한다
-    if (roadNumber.length > 1) {
-      // * 필터함수를 호출하여 필터링 된 값을 저장한다
-      result = indutypeFilter.get(roadNumber, indutype);
-    } else {
-      let lotNumber = await getMarketAPI.api('REFINE_LOTNO_ADDR', address);
-      result = indutypeFilter.get(lotNumber, indutype);
-    }
+      // * 경기도 api로 부터 도로명 주소 마켓 받아온다
+      let roadNumber = await getMarketAPI.api('REFINE_ROADNM_ADDR', address);
 
-    result = famattingKaKao.get(result);
-    result = result.filter((ele) => ele !== undefined);
-    if (result) {
-      res.status(200).send({ addressList: result });
-    } else {
-      res.status(404).send('Not Found');
+      // * 도로명이 존재하면 지번주소 마켓은 생략한다
+      if (roadNumber.length > 1) {
+        // * 필터함수를 호출하여 필터링 된 값을 저장한다
+        result = indutypeFilter.get(roadNumber, indutype);
+      } else {
+        let lotNumber = await getMarketAPI.api('REFINE_LOTNO_ADDR', address);
+        result = indutypeFilter.get(lotNumber, indutype);
+      }
+      result = famattingKaKao.get(result);
+      result = result.filter((ele) => ele !== undefined);
+      console.log(result);
+      if (result.length >= 1) {
+        res.status(200).send({ addressList: result });
+      } else {
+        res.status(404).send('Not Found');
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('server error');
     }
   },
 };

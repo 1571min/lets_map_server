@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const verifyToken = require('../middleware/verifyToken');
+const { verifyToken } = require('../middleware/verifyToken');
 
 const {
   userController,
@@ -9,13 +9,14 @@ const {
   favoritesController,
 } = require('../controller');
 
-
 // * POST /signin
 router.post('/signin', userController.signin.post);
 
-
 // * GET /signin/signin_google
 router.post('/signin_google', userController.signin_google.post);
+
+// * GET /
+router.get('/userinfo', verifyToken, userController.userinfo.get);
 
 // * POST /signout
 router.post('/signout', userController.signout.post);
@@ -45,8 +46,8 @@ router.delete('/review', reviewController.review.delete);
 router.put('/review', reviewController.review.put);
 
 // * GET /favorites
-router.get('/favorites', favoritesController.favorites.get);
+router.get('/favorites', verifyToken, favoritesController.favorites.get);
 // * POST /favorites
-router.post('/favorites', favoritesController.favorites.post);
+router.post('/favorites', verifyToken, favoritesController.favorites.post);
 
 module.exports = router;
