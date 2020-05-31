@@ -40,7 +40,7 @@ module.exports = {
                 },
                 process.env.JWT_PASSWORD,
                 {
-                  expiresIn: '1m',
+                  expiresIn: '1h',
                 },
               );
               req.headers.authorization = token;

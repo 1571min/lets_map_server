@@ -2,7 +2,7 @@ require('dotenv/config');
 
 module.exports = {
   development: {
-    username: 'root',
+    username: 'letsMapAdmin',
     password: process.env.DATABASE_PASSWORD,
     database: 'database_development',
     host: process.env.DATABASE_HOST,

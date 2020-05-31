@@ -219,8 +219,10 @@ module.exports = {
   get: (marketList, indutype) => {
     if (marketList[0] !== null) {
       let resultMarket = marketList.map((market) => {
-        if (indutypeData[indutype].includes(market.INDUTYPE_NM)) {
-          return market;
+        if (market.INDUTYPE_NM) {
+          if (indutypeData[indutype].includes(market.INDUTYPE_NM)) {
+            return market;
+          }
         }
       });
       indutypeData[indutype];
